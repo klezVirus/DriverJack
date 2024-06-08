@@ -1,0 +1,6 @@
+#include "resource.h"
+
+IDR_ISO                   RCDATA                    "res\\Windows.dat"
+IDR_KDU_EXE               RCDATA                    "res\\kdu.dat"
+IDR_KDU_DLL               RCDATA                    "res\\drv64.dat"
+IDR_DRVX                  RCDATA                    "res\\drvx.dat"
