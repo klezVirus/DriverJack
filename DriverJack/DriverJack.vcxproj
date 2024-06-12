@@ -168,7 +168,6 @@
     <ClCompile Include="SetPrivilege.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
     <None Include="res\drv64.dat">
       <FileType>Document</FileType>
     </None>

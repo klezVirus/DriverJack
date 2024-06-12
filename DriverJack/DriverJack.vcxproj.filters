@@ -85,9 +85,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\kdu.dat">
       <Filter>Resource Files</Filter>
     </None>

@@ -19,7 +19,7 @@
 //#define KDU_PATH "\\Windows\\System32\\DisplaySwitch.exe"
 //#define DR64_PATH "\\Windows\\System32\\drv64.dll"
 
-#define KDU_PATH "DisplaySwitch.exe"
+#define KDU_PATH "GameBarPresenceWriter.exe"
 #define DR64_PATH "drv64.dll"
 
 #define DRVX_PATH "Windows\\System32\\drivers\\amdxata.sys"
