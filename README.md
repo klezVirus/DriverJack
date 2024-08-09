@@ -2,8 +2,7 @@
 
 ## Introduction
 
-**DriverJack** is a tool designed to load a malicious driver by abusing lesser-known NTFS techniques. These method bypass the registration of a Driver Service on the system by hijacking an existing service. 
-The attack abuses an Emulated Filesystem Read-Only bypass to swap the content of a driver file on an ISO before loading it.
+**DriverJack** is a tool designed to load a vulnerable driver by abusing lesser-known NTFS techniques. These method bypass the registration of a Driver Service on the system by hijacking an existing service, and also spoof the image path presented in the Driver Load event. To further masquerade the presence of a vulnerable driver, the attack also abuses an Emulated Filesystem Read-Only bypass to swap the content of a driver file on a mounted ISO before loading it.
 
 ## Emulated Filesystem Read-Only Bypass
 
