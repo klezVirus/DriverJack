@@ -55,7 +55,7 @@ When combined with NT Symlink Abuse, explained before, this technique can comple
 
 ## Conclusion
 
-**DriverJack** demonstrates advanced driver-loading attacks that bypass conventional detection methods by leveraging little-known NTFS and symbolic link techniques. These methods allow the loading of malicious drivers without leaving the typical traces that traditional methods might. 
+**DriverJack** demonstrates another, non-conventional way for vulnerable driver-loading that leverages CDFS emulated filesystems and lesser-known NTFS symbolic link properties. 
 
 ## Thanks
 
